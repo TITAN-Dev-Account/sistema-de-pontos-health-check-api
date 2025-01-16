@@ -24,7 +24,10 @@ async function checkApiHealth() {
         }
     } catch (error) {
         console.error(`Erro ao tentar testar a API: ${error.message}`);
-        await notifyDiscord("🚨 A API está inativa! 🚨");
+        if (!isApiDown) {
+            isApiDown = true;
+            await notifyDiscord("🚨 A API está inativa! 🚨");
+        }
     }
 }
 
